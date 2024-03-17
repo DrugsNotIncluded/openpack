@@ -3,11 +3,12 @@ package core
 import (
 	"errors"
 	"fmt"
-	"golang.org/x/exp/slices"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"golang.org/x/exp/slices"
 
 	"github.com/BurntSushi/toml"
 	"github.com/Masterminds/semver/v3"
@@ -54,6 +55,7 @@ func LoadPack() (Pack, error) {
 
 	// Check pack-format
 	if len(modpack.PackFormat) == 0 {
+		//pack-format leaved for compatibility
 		fmt.Println("Modpack manifest has no pack-format field; assuming packwiz:1.1.0")
 		modpack.PackFormat = "packwiz:1.1.0"
 	}
@@ -63,17 +65,17 @@ func LoadPack() (Pack, error) {
 		modpack.PackFormat = "packwiz:1.1.0"
 	}
 	if !strings.HasPrefix(modpack.PackFormat, "packwiz:") {
-		return Pack{}, errors.New("pack-format field does not indicate a valid packwiz pack")
+		return Pack{}, errors.New("pack-format field does not indicate a valid openpack pack")
 	}
 	ver, err := semver.StrictNewVersion(strings.TrimPrefix(modpack.PackFormat, "packwiz:"))
 	if err != nil {
 		return Pack{}, fmt.Errorf("pack-format field is not valid semver: %w", err)
 	}
 	if !PackFormatConstraintAccepted.Check(ver) {
-		return Pack{}, errors.New("the modpack is incompatible with this version of packwiz; please update")
+		return Pack{}, errors.New("the modpack is incompatible with this version of openpack; please update")
 	}
 	if !PackFormatConstraintSuggestUpgrade.Check(ver) {
-		fmt.Println("Modpack has a newer feature number than is supported by this version of packwiz. Update to the latest version of packwiz for new features and bugfixes!")
+		fmt.Println("Modpack has a newer feature number than is supported by this version of openpack. Update to the latest version of openpack for new features and bugfixes!")
 	}
 	// TODO: suggest migration if necessary (primarily for 2.0.0)
 

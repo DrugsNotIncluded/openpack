@@ -11,7 +11,7 @@
       # List of explicetely unsupported systems
       explicitelyUnsupportedSystems = [];
 
-      # Packwiz should support all 64-bit systems supported by go, but nix only
+      # Openpack should support all 64-bit systems supported by go, but nix only
       # support strictly less, so all nix-supported systems are included
       # (except ones in explicitelyUnsupportedSystems).
       supportedSystems =
@@ -27,19 +27,19 @@
       # Import nixpkgs' package set for each system.
       nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
     in {
-      # Packwiz package
+      # Openpack package
       packages = forAllSystems (system: let
         pkgs = nixpkgsFor.${system};
       in rec {
-        packwiz = pkgs.callPackage ./nix {
+        openpack = pkgs.callPackage ./nix {
           version = substring 0 8 self.rev or "dirty";
           vendorSha256 = readFile ./nix/vendor-sha256;
           buildGoModule = pkgs.buildGoModule;
             # As of writing, `pkgs.buildGoModule` is aliased to
             # `pkgs.buildGo121Module` in Nixpkgs.
         };
-        # Build packwiz by default when no package name is specified
-        default = packwiz;
+        # Build openpack by default when no package name is specified
+        default = openpack;
       });
 
       # This flake's nix code formatter

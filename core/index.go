@@ -145,9 +145,9 @@ var ignoreDefaults = []string{
 	// Exclude exported Modrinth packs
 	"*.mrpack",
 
-	// Exclude packwiz binaries, if the user puts them in their pack folder
-	"packwiz.exe",
-	"packwiz", // Note: also excludes packwiz/ as a directory - you can negate this pattern if you want a directory called packwiz
+	// Exclude openpack binaries, if the user puts them in their pack folder
+	"openpack.exe",
+	"openpack", // Note: also excludes openpack/ as a directory - you can negate this pattern if you want a directory called openpack
 }
 
 func readGitignore(path string) (*gitignore.GitIgnore, bool) {
@@ -173,7 +173,7 @@ func (in *Index) Refresh() error {
 	pathPF, _ := filepath.Abs(viper.GetString("pack-file"))
 	pathIndex, _ := filepath.Abs(in.indexFile)
 
-	pathIgnore, _ := filepath.Abs(filepath.Join(in.packRoot, ".packwizignore"))
+	pathIgnore, _ := filepath.Abs(filepath.Join(in.packRoot, ".openpackignore"))
 	ignore, ignoreExists := readGitignore(pathIgnore)
 
 	var fileList []string

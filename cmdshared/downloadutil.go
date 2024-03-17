@@ -3,22 +3,23 @@ package cmdshared
 import (
 	"archive/zip"
 	"fmt"
-	"github.com/packwiz/packwiz/core"
 	"io"
 	"os"
 	"path"
 	"path/filepath"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 )
 
 func ListManualDownloads(session core.DownloadSession) {
 	manualDownloads := session.GetManualDownloads()
 	if len(manualDownloads) > 0 {
-		fmt.Printf("Found %v manual downloads; these mods are unable to be downloaded by packwiz (due to API limitations) and must be manually downloaded:\n",
+		fmt.Printf("Found %v manual downloads; these mods are unable to be downloaded by openpack (due to API limitations) and must be manually downloaded:\n",
 			len(manualDownloads))
 		for _, dl := range manualDownloads {
 			fmt.Printf("%s (%s) from %s\n", dl.Name, dl.FileName, dl.URL)
 		}
-		cacheDir, err := core.GetPackwizCache()
+		cacheDir, err := core.GetOpenpackCache()
 		if err != nil {
 			fmt.Printf("Error locating cache folder: %v", err)
 			os.Exit(1)
@@ -99,9 +100,9 @@ func PrintDisclaimer(isCf bool) {
 	fmt.Println("Disclaimer: you are responsible for ensuring you comply with ALL the licenses, or obtain appropriate permissions, for the files \"added to zip\" below")
 	if isCf {
 		fmt.Println("Note that mods bundled within a CurseForge pack must be in the Approved Non-CurseForge Mods list")
-		fmt.Println("packwiz is currently unable to match metadata between mod sites - if any of these are available from CurseForge you should change them to use CurseForge metadata (e.g. by re-adding them using the cf commands)")
+		fmt.Println("openpack is currently unable to match metadata between mod sites - if any of these are available from CurseForge you should change them to use CurseForge metadata (e.g. by re-adding them using the cf commands)")
 	} else {
-		fmt.Println("packwiz is currently unable to match metadata between mod sites - if any of these are available from Modrinth you should change them to use Modrinth metadata (e.g. by re-adding them using the mr commands)")
+		fmt.Println("openpack is currently unable to match metadata between mod sites - if any of these are available from Modrinth you should change them to use Modrinth metadata (e.g. by re-adding them using the mr commands)")
 	}
 	fmt.Println()
 }

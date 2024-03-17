@@ -2,20 +2,21 @@ package url
 
 import (
 	"fmt"
-	"github.com/packwiz/packwiz/core"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"io"
 	"net/url"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
+
+	"github.com/DrugsNotIncluded/openpack/core"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var installCmd = &cobra.Command{
 	Use:     "add [name] [url]",
-	Short:   "Add an external file from a direct download link, for sites that are not directly supported by packwiz",
+	Short:   "Add an external file from a direct download link, for sites that are not directly supported by openpack",
 	Aliases: []string{"install", "get"},
 	Args:    cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -51,7 +52,7 @@ var installCmd = &cobra.Command{
 				msg = "curseforge add " + args[1]
 			}
 			if msg != "" {
-				fmt.Println("Consider using packwiz", msg, "instead; if you know what you are doing use --force to add this file without update metadata.")
+				fmt.Println("Consider using openpack", msg, "instead; if you know what you are doing use --force to add this file without update metadata.")
 				os.Exit(1)
 			}
 		}
@@ -148,6 +149,6 @@ func getHash(url string) (string, error) {
 func init() {
 	urlCmd.AddCommand(installCmd)
 
-	installCmd.Flags().Bool("force", false, "Add a file even if the download URL is supported by packwiz in an alternative command (which may support dependencies and updates)")
+	installCmd.Flags().Bool("force", false, "Add a file even if the download URL is supported by openpack in an alternative command (which may support dependencies and updates)")
 	installCmd.Flags().String("meta-name", "", "Filename to use for the created metadata file (defaults to a name generated from the name you supply)")
 }

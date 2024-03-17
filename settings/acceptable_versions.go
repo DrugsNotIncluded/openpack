@@ -2,13 +2,14 @@ package settings
 
 import (
 	"fmt"
-	"github.com/packwiz/packwiz/cmdshared"
-	"github.com/packwiz/packwiz/core"
+	"os"
+	"strings"
+
+	"github.com/DrugsNotIncluded/openpack/cmdshared"
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 	"github.com/unascribed/FlexVer/go/flexver"
 	"golang.org/x/exp/slices"
-	"os"
-	"strings"
 )
 
 var acceptableVersionsCommand = &cobra.Command{
@@ -21,7 +22,7 @@ var acceptableVersionsCommand = &cobra.Command{
 		if err != nil {
 			// Check if it's a no such file or directory error
 			if os.IsNotExist(err) {
-				fmt.Println("No pack.toml file found, run 'packwiz init' to create one!")
+				fmt.Println("No pack.toml file found, run 'openpack init' to create one!")
 				os.Exit(1)
 			}
 			fmt.Printf("Error loading pack: %s\n", err)

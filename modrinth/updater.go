@@ -1,12 +1,13 @@
 package modrinth
 
 import (
-	modrinthApi "codeberg.org/jmansfield/go-modrinth/modrinth"
 	"errors"
 	"fmt"
 
+	modrinthApi "codeberg.org/jmansfield/go-modrinth/modrinth"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/mitchellh/mapstructure"
-	"github.com/packwiz/packwiz/core"
 )
 
 type mrUpdateData struct {

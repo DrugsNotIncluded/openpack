@@ -6,14 +6,15 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/packwiz/packwiz/curseforge/packinterop"
 	"io"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
 
-	"github.com/packwiz/packwiz/core"
+	"github.com/DrugsNotIncluded/openpack/curseforge/packinterop"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

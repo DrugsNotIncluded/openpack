@@ -14,7 +14,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/packwiz/packwiz/core"
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -65,7 +65,7 @@ var serveCmd = &cobra.Command{
 
 			// Force-disable no-internal-hashes mode (equiv to --build flag in refresh) for serving over HTTP
 			if viper.GetBool("no-internal-hashes") {
-				fmt.Println("Note: no-internal-hashes mode is set; still writing hashes for use with packwiz-installer - run packwiz refresh to remove them.")
+				fmt.Println("Note: no-internal-hashes mode is set; still writing hashes for use with openpack-installer - run openpack refresh to remove them.")
 				viper.Set("no-internal-hashes", false)
 			}
 

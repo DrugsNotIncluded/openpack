@@ -1,19 +1,20 @@
 package modrinth
 
 import (
-	modrinthApi "codeberg.org/jmansfield/go-modrinth/modrinth"
 	"errors"
 	"fmt"
-	"github.com/packwiz/packwiz/cmd"
-	"github.com/packwiz/packwiz/core"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-	"github.com/unascribed/FlexVer/go/flexver"
-	"golang.org/x/exp/slices"
 	"math"
 	"net/http"
 	"net/url"
 	"regexp"
+
+	modrinthApi "codeberg.org/jmansfield/go-modrinth/modrinth"
+	"github.com/DrugsNotIncluded/openpack/cmd"
+	"github.com/DrugsNotIncluded/openpack/core"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"github.com/unascribed/FlexVer/go/flexver"
+	"golang.org/x/exp/slices"
 )
 
 var modrinthCmd = &cobra.Command{
@@ -327,7 +328,7 @@ func getLatestVersion(projectID string, name string, pack core.Pack) (*modrinthA
 	}
 	if len(result) == 0 {
 		// TODO: retry with datapack specified, to determine what the issue is? or just request all and filter afterwards
-		return nil, errors.New("no valid versions found\n\tUse the 'packwiz settings acceptable-versions' command to accept more game versions\n\tTo use datapacks, add a datapack loader mod and specify the datapack-folder option with the folder this mod loads datapacks from")
+		return nil, errors.New("no valid versions found\n\tUse the 'openpack settings acceptable-versions' command to accept more game versions\n\tTo use datapacks, add a datapack loader mod and specify the datapack-folder option with the folder this mod loads datapacks from")
 	}
 
 	// TODO: option to always compare using flexver?
@@ -435,7 +436,7 @@ func resolveVersion(project *modrinthApi.Project, version string) (*modrinthApi.
 	return nil, fmt.Errorf("unable to find version %s", version)
 }
 
-// mapDepOverride transforms manual dependency overrides (which will likely be removed when packwiz is able to determine provided mods)
+// mapDepOverride transforms manual dependency overrides (which will likely be removed when openpack is able to determine provided mods)
 func mapDepOverride(depID string, isQuilt bool, mcVersion string) string {
 	if isQuilt && (depID == "P7dR8mSH" || depID == "fabric-api") {
 		// Transform FAPI dependencies to QFAPI/QSL dependencies when using Quilt

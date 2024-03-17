@@ -2,10 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"os"
 
-	"github.com/packwiz/packwiz/core"
+	"github.com/spf13/viper"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 )
 
@@ -59,5 +60,5 @@ var refreshCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(refreshCmd)
 
-	refreshCmd.Flags().Bool("build", false, "Only has an effect in no-internal-hashes mode: generates internal hashes for distribution with packwiz-installer")
+	refreshCmd.Flags().Bool("build", false, "Only has an effect in no-internal-hashes mode: generates internal hashes for distribution with openpack-installer")
 }

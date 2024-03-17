@@ -4,14 +4,15 @@ import (
 	"archive/zip"
 	"encoding/json"
 	"fmt"
-	"github.com/packwiz/packwiz/cmdshared"
-	"github.com/spf13/viper"
-	"golang.org/x/exp/slices"
 	"net/url"
 	"os"
 	"strconv"
 
-	"github.com/packwiz/packwiz/core"
+	"github.com/DrugsNotIncluded/openpack/cmdshared"
+	"github.com/spf13/viper"
+	"golang.org/x/exp/slices"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 )
 
@@ -61,7 +62,7 @@ var exportCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		fileName := viper.GetString("modrinth.export.output")
+		fileName := viper.GetString(".export.output")
 		if fileName == "" {
 			fileName = pack.GetPackName() + ".mrpack"
 		}
@@ -81,7 +82,7 @@ var exportCmd = &cobra.Command{
 
 		fmt.Printf("Retrieving %v external files...\n", len(mods))
 
-		restrictDomains := viper.GetBool("modrinth.export.restrictDomains")
+		restrictDomains := viper.GetBool(".export.restrictDomains")
 
 		for _, mod := range mods {
 			if !canBeIncludedDirectly(mod, restrictDomains) {
@@ -143,7 +144,7 @@ var exportCmd = &cobra.Command{
 					serverEnv = envInstalled
 				}
 
-				// Modrinth URLs must be RFC3986
+				//  URLs must be RFC3986
 				u, err := core.ReencodeURL(dl.Mod.Download.URL)
 				if err != nil {
 					fmt.Printf("Error re-encoding download URL: %s\n", err.Error())
@@ -208,10 +209,10 @@ var exportCmd = &cobra.Command{
 		}
 
 		if len(pack.Version) == 0 {
-			fmt.Println("Warning: pack.toml version field must not be empty to create a valid Modrinth pack")
+			fmt.Println("Warning: pack.toml version field must not be empty to create a valid  pack")
 		}
 
-		manifestFile, err := exp.Create("modrinth.index.json")
+		manifestFile, err := exp.Create(".index.json")
 		if err != nil {
 			_ = exp.Close()
 			_ = expFile.Close()

@@ -2,11 +2,12 @@ package migrate
 
 import (
 	"fmt"
-	"github.com/packwiz/packwiz/cmdshared"
-	"github.com/packwiz/packwiz/core"
+	"os"
+
+	"github.com/DrugsNotIncluded/openpack/cmdshared"
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 	"golang.org/x/exp/slices"
-	"os"
 )
 
 var loaderCommand = &cobra.Command{
@@ -18,7 +19,7 @@ var loaderCommand = &cobra.Command{
 		if err != nil {
 			// Check if it's a no such file or directory error
 			if os.IsNotExist(err) {
-				fmt.Println("No pack.toml file found, run 'packwiz init' to create one!")
+				fmt.Println("No pack.toml file found, run 'openpack init' to create one!")
 				os.Exit(1)
 			}
 			fmt.Printf("Error loading pack: %s\n", err)

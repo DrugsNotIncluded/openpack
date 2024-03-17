@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/packwiz/packwiz/core"
-	"github.com/spf13/pflag"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/DrugsNotIncluded/openpack/core"
+	"github.com/spf13/pflag"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -17,18 +18,18 @@ var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "packwiz",
+	Use:   "openpack",
 	Short: "A command line tool for creating Minecraft modpacks",
 }
 
-// Execute starts the root command for packwiz
+// Execute starts the root command for openpack
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 }
 
-// Add adds a new command as a subcommand to packwiz
+// Add adds a new command as a subcommand to openpack
 func Add(newCommand *cobra.Command) {
 	rootCmd.AddCommand(newCommand)
 }
@@ -56,20 +57,20 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&metaFolderBase, "meta-folder-base", ".", "The base folder from which meta-folder will be resolved, defaulting to the current directory (so you can put all mods/etc in a subfolder while still using the default behaviour)")
 	_ = viper.BindPFlag("meta-folder-base", rootCmd.PersistentFlags().Lookup("meta-folder-base"))
 
-	defaultCacheDir, err := core.GetPackwizCache()
+	defaultCacheDir, err := core.GetOpenpackCache()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	rootCmd.PersistentFlags().String("cache", defaultCacheDir, "The directory where packwiz will cache downloaded mods")
+	rootCmd.PersistentFlags().String("cache", defaultCacheDir, "The directory where openpack will cache downloaded mods")
 	_ = viper.BindPFlag("cache.directory", rootCmd.PersistentFlags().Lookup("cache"))
 
-	file, err := core.GetPackwizLocalStore()
+	file, err := core.GetOpenpackLocalStore()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	file = filepath.Join(file, ".packwiz.toml")
+	file = filepath.Join(file, ".openpack.toml")
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "The config file to use (default \""+file+"\")")
 
 	var nonInteractive bool
@@ -83,18 +84,18 @@ func initConfig() {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
-		dir, err := core.GetPackwizLocalStore()
+		dir, err := core.GetOpenpackLocalStore()
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 
 		viper.AddConfigPath(dir)
-		viper.SetConfigName(".packwiz")
+		viper.SetConfigName(".openpack")
 	}
 
 	// Read in environment variables that match
-	viper.SetEnvPrefix("packwiz")
+	viper.SetEnvPrefix("openpack")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
 

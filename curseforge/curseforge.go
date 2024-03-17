@@ -3,18 +3,19 @@ package curseforge
 import (
 	"errors"
 	"fmt"
-	"github.com/spf13/viper"
-	"github.com/unascribed/FlexVer/go/flexver"
-	"golang.org/x/exp/slices"
 	"io"
 	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
 
+	"github.com/spf13/viper"
+	"github.com/unascribed/FlexVer/go/flexver"
+	"golang.org/x/exp/slices"
+
+	"github.com/DrugsNotIncluded/openpack/cmd"
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/mitchellh/mapstructure"
-	"github.com/packwiz/packwiz/cmd"
-	"github.com/packwiz/packwiz/core"
 	"github.com/spf13/cobra"
 )
 
@@ -597,7 +598,7 @@ func (m *cfDownloadMetadata) DownloadFile() (io.ReadCloser, error) {
 	return resp.Body, nil
 }
 
-// mapDepOverride transforms manual dependency overrides (which will likely be removed when packwiz is able to determine provided mods)
+// mapDepOverride transforms manual dependency overrides (which will likely be removed when openpack is able to determine provided mods)
 func mapDepOverride(depID uint32, isQuilt bool, mcVersion string) uint32 {
 	if isQuilt && depID == 306612 {
 		// Transform FAPI dependencies to QFAPI/QSL dependencies when using Quilt

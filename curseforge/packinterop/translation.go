@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/packwiz/packwiz/core"
 	"io"
 	"os"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 )
 
 func ReadMetadata(s ImportPackSource) ImportPackMetadata {

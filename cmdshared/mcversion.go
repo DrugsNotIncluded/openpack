@@ -3,10 +3,11 @@ package cmdshared
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/packwiz/packwiz/core"
 	"os"
 	"sort"
 	"time"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 )
 
 type McVersionManifest struct {

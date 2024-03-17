@@ -2,7 +2,7 @@ package core
 
 import "io"
 
-// Updaters stores all the updaters that packwiz can use. Add your own update systems to this map, keyed by the configuration name.
+// Updaters stores all the updaters that openpack can use. Add your own update systems to this map, keyed by the configuration name.
 var Updaters = make(map[string]Updater)
 
 // Updater is used to process updates on mods
@@ -33,7 +33,7 @@ type UpdateCheck struct {
 	Error error
 }
 
-// MetaDownloaders stores all the metadata-based installers that packwiz can use. Add your own downloaders to this map, keyed by the source name.
+// MetaDownloaders stores all the metadata-based installers that openpack can use. Add your own downloaders to this map, keyed by the source name.
 var MetaDownloaders = make(map[string]MetaDownloader)
 
 // MetaDownloader specifies a downloader for a Mod using a "metadata:source" mode

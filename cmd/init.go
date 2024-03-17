@@ -3,22 +3,23 @@ package cmd
 import (
 	"bufio"
 	"fmt"
-	"github.com/fatih/camelcase"
-	"github.com/igorsobreira/titlecase"
-	"github.com/packwiz/packwiz/cmdshared"
-	"github.com/packwiz/packwiz/core"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-	"golang.org/x/exp/slices"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/DrugsNotIncluded/openpack/cmdshared"
+	"github.com/DrugsNotIncluded/openpack/core"
+	"github.com/fatih/camelcase"
+	"github.com/igorsobreira/titlecase"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"golang.org/x/exp/slices"
 )
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialise a packwiz modpack",
+	Short: "Initialise a openpack modpack",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		_, err := os.Stat(viper.GetString("pack-file"))

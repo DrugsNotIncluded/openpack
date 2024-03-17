@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/packwiz/packwiz/core"
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +22,7 @@ func pinMod(args []string, pinned bool) {
 	}
 	modPath, ok := index.FindMod(args[0])
 	if !ok {
-		fmt.Println("Can't find this file; please ensure you have run packwiz refresh and use the name of the .pw.toml file (defaults to the project slug)")
+		fmt.Println("Can't find this file; please ensure you have run openpack refresh and use the name of the .pw.toml file (defaults to the project slug)")
 		os.Exit(1)
 	}
 	modData, err := core.LoadMod(modPath)

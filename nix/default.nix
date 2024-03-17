@@ -12,7 +12,7 @@ in
     vendorSha256,
   }:
     buildGoModule rec {
-      pname = "packwiz";
+      pname = "openpack";
       inherit version vendorSha256;
 
       src = ./..;
@@ -23,16 +23,16 @@ in
 
       # Install shell completions
       postInstall = ''
-        installShellCompletion --cmd packwiz \
-          --bash <($out/bin/packwiz completion bash) \
-          --fish <($out/bin/packwiz completion fish) \
-          --zsh <($out/bin/packwiz completion zsh)
+        installShellCompletion --cmd openpack \
+          --bash <($out/bin/openpack completion bash) \
+          --fish <($out/bin/openpack completion fish) \
+          --zsh <($out/bin/openpack completion zsh)
       '';
 
       meta = with lib; {
         description = "A command line tool for editing and distributing Minecraft modpacks, using a git-friendly TOML format";
-        homepage = "https://packwiz.infra.link/";
+        homepage = "https://openpack.infra.link/";
         license = licenses.mit;
-        mainProgram = "packwiz";
+        mainProgram = "openpack";
       };
     }

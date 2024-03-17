@@ -1,14 +1,16 @@
 package main
 
 import (
-	// Modules of packwiz
-	"github.com/packwiz/packwiz/cmd"
-	_ "github.com/packwiz/packwiz/curseforge"
-	_ "github.com/packwiz/packwiz/migrate"
-	_ "github.com/packwiz/packwiz/modrinth"
-	_ "github.com/packwiz/packwiz/settings"
-	_ "github.com/packwiz/packwiz/url"
-	_ "github.com/packwiz/packwiz/utils"
+	// Modules of openpack
+	_ "github.com/DrugsNotIncluded/openpack/automodpack"
+	"github.com/DrugsNotIncluded/openpack/cmd"
+	_ "github.com/DrugsNotIncluded/openpack/curseforge"
+	_ "github.com/DrugsNotIncluded/openpack/generic"
+	_ "github.com/DrugsNotIncluded/openpack/migrate"
+	_ "github.com/DrugsNotIncluded/openpack/modrinth"
+	_ "github.com/DrugsNotIncluded/openpack/settings"
+	_ "github.com/DrugsNotIncluded/openpack/url"
+	_ "github.com/DrugsNotIncluded/openpack/utils"
 )
 
 func main() {

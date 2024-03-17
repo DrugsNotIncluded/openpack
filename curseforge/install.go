@@ -3,14 +3,15 @@ package curseforge
 import (
 	"errors"
 	"fmt"
-	"github.com/packwiz/packwiz/cmdshared"
-	"github.com/sahilm/fuzzy"
-	"github.com/spf13/viper"
-	"golang.org/x/exp/slices"
 	"os"
 	"strings"
 
-	"github.com/packwiz/packwiz/core"
+	"github.com/DrugsNotIncluded/openpack/cmdshared"
+	"github.com/sahilm/fuzzy"
+	"github.com/spf13/viper"
+	"golang.org/x/exp/slices"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 	"gopkg.in/dixonwille/wmenu.v4"
 )
@@ -426,7 +427,7 @@ func getLatestFile(modInfoData modInfo, mcVersions []string, fileID uint32, pack
 
 		// Possible to reach this point without obtaining file info; particularly from GameVersionLatestFiles
 		if fileID == 0 {
-			return modFileInfo{}, errors.New("mod not available for the configured Minecraft version(s) (use the 'packwiz settings acceptable-versions' command to accept more) or loader")
+			return modFileInfo{}, errors.New("mod not available for the configured Minecraft version(s) (use the 'openpack settings acceptable-versions' command to accept more) or loader")
 		}
 	}
 

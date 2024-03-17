@@ -4,15 +4,16 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"golang.org/x/exp/slices"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"golang.org/x/exp/slices"
 )
 
-const UserAgent = "packwiz/packwiz"
+const UserAgent = "openpack/openpack"
 
 func GetWithUA(url string, contentType string) (resp *http.Response, err error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -586,7 +587,7 @@ func removeEmpty(hashList []string) ([]string, []int) {
 func CreateDownloadSession(mods []*Mod, hashesToObtain []string) (DownloadSession, error) {
 	// Load cache index
 	cacheIndex := CacheIndex{Version: 1, Hashes: make(map[string][]string)}
-	cachePath, err := GetPackwizCache()
+	cachePath, err := GetOpenpackCache()
 	if err != nil {
 		return nil, fmt.Errorf("failed to load cache: %w", err)
 	}

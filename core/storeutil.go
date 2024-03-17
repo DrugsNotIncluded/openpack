@@ -8,59 +8,59 @@ import (
 	"github.com/spf13/viper"
 )
 
-func GetPackwizLocalStore() (string, error) {
+func GetOpenpackLocalStore() (string, error) {
 	if //goland:noinspection GoBoolExpressions
 	runtime.GOOS == "linux" {
 		// Prefer $XDG_DATA_HOME over $XDG_CACHE_HOME
 		dataHome := os.Getenv("XDG_DATA_HOME")
 		if dataHome != "" {
-			return filepath.Join(dataHome, "packwiz"), nil
+			return filepath.Join(dataHome, "openpack"), nil
 		}
 	}
 	userConfigDir, err := os.UserConfigDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(userConfigDir, "packwiz"), nil
+	return filepath.Join(userConfigDir, "openpack"), nil
 }
 
-func GetPackwizLocalCache() (string, error) {
+func GetOpenpackLocalCache() (string, error) {
 	userCacheDir, err := os.UserCacheDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(userCacheDir, "packwiz"), nil
+	return filepath.Join(userCacheDir, "openpack"), nil
 }
 
-func GetPackwizInstallBinPath() (string, error) {
-	localStore, err := GetPackwizLocalStore()
+func GetOpenpackInstallBinPath() (string, error) {
+	localStore, err := GetOpenpackLocalStore()
 	if err != nil {
 		return "", err
 	}
 	return filepath.Join(localStore, "bin"), nil
 }
 
-func GetPackwizInstallBinFile() (string, error) {
-	binPath, err := GetPackwizInstallBinPath()
+func GetOpenpackInstallBinFile() (string, error) {
+	binPath, err := GetOpenpackInstallBinPath()
 	if err != nil {
 		return "", err
 	}
 	var exeName string
 	if //goland:noinspection GoBoolExpressions
 	runtime.GOOS == "windows" {
-		exeName = "packwiz.exe"
+		exeName = "openpack.exe"
 	} else {
-		exeName = "packwiz"
+		exeName = "openpack"
 	}
 	return filepath.Join(binPath, exeName), nil
 }
 
-func GetPackwizCache() (string, error) {
+func GetOpenpackCache() (string, error) {
 	configuredCache := viper.GetString("cache.directory")
 	if configuredCache != "" {
 		return configuredCache, nil
 	}
-	localStore, err := GetPackwizLocalCache()
+	localStore, err := GetOpenpackLocalCache()
 	if err != nil {
 		return "", err
 	}

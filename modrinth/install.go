@@ -1,17 +1,18 @@
 package modrinth
 
 import (
-	modrinthApi "codeberg.org/jmansfield/go-modrinth/modrinth"
 	"errors"
 	"fmt"
-	"github.com/packwiz/packwiz/cmdshared"
-	"github.com/spf13/viper"
-	"golang.org/x/exp/slices"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/packwiz/packwiz/core"
+	modrinthApi "codeberg.org/jmansfield/go-modrinth/modrinth"
+	"github.com/DrugsNotIncluded/openpack/cmdshared"
+	"github.com/spf13/viper"
+	"golang.org/x/exp/slices"
+
+	"github.com/DrugsNotIncluded/openpack/core"
 	"github.com/spf13/cobra"
 	"gopkg.in/dixonwille/wmenu.v4"
 )
@@ -205,7 +206,7 @@ func installProject(project *modrinthApi.Project, versionFilename string, pack c
 		return fmt.Errorf("failed to get latest version: %v", err)
 	}
 	if latestVersion.ID == nil {
-		return errors.New("mod not available for the configured Minecraft version(s) (use the 'packwiz settings acceptable-versions' command to accept more) or loader")
+		return errors.New("mod not available for the configured Minecraft version(s) (use the 'openpack settings acceptable-versions' command to accept more) or loader")
 	}
 
 	return installVersion(project, latestVersion, versionFilename, pack, index)
